@@ -16,7 +16,7 @@ import Randomizer from './pages/Randomizer'
 function App() {
   return (
     <div className="App">
-    <Header/>
+     <Header/>
     <Router basename={process.env.PUBLIC_URL}>
       <Switch>
       <Route path="/" exact component={MainPage}></Route>

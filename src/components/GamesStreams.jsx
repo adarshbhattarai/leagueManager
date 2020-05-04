@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 export default ({ gamesStreams }) => {
     return (
@@ -14,15 +15,15 @@ export default ({ gamesStreams }) => {
           <div className="row">
             {
                 gamesStreams && gamesStreams.map(({ title, caption }, index) => 
-                    <div className="col-md-4 col-sm-6 gamesstreams-item">
-                        <a className="gamesstreams-link" data-toggle="modal" href="#gamesstreamsModal1">
+                    <div className="col-md-4 col-sm-6 gamesstreams-item" key={index}>
+                        <Link className="gamesstreams-link" data-toggle="modal" to="#gamesstreamsModal1">
                             <div className="gamesstreams-hover">
                                 <div className="gamesstreams-hover-content">
                                     <i className="fa fa-plus fa-3x"></i>
                                 </div>
                             </div>
                             <img className="img-fluid" src={ `https://unsplash.it/350/140/?${Math.floor(Math.random(0,100) * 100)}` } alt="gamesstreams_img" />
-                        </a>
+                        </Link>
                         <div className="gamesstreams-caption">
                             <h4>{ title }</h4>
                             <p className="text-muted">{ caption }</p>

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 
 export default () => {
     const [header, setHeader] = useState("navbar navbar-expand-lg navbar-dark fixed-top" + 
-                    (window.location.pathname==='/' ?"" : " navbar-shrink"));
+                    (window.location.pathname===process.env.PUBLIC_URL+"/" ?"" : " navbar-shrink"));
     
     const listenScrollEvent = (event) => {
-        if (window.scrollY < 110 && window.location.pathname==='/') {
+        if (window.scrollY < 110 && window.location.pathname===process.env.PUBLIC_URL+"/") {
           return setHeader("navbar navbar-expand-lg navbar-dark fixed-top")
         } else if (window.scrollY > 100) {
           return setHeader("navbar navbar-expand-lg navbar-dark fixed-top navbar-shrink")
@@ -22,7 +22,7 @@ export default () => {
     return (
 <nav className={header} id="mainNav">
     <div className="container">
-      <a className="navbar-brand js-scroll-trigger" href="/">Soccer League Manager</a>
+      <a className="navbar-brand js-scroll-trigger" href={process.env.PUBLIC_URL+"/"}>Soccer League Manager</a>
       <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i className="fa fa-bars"></i>
@@ -30,19 +30,19 @@ export default () => {
       <div className="collapse navbar-collapse" id="navbarResponsive">
         <ul className="navbar-nav text-uppercase ml-auto">
           <li className="nav-item">
-            <a className="nav-link js-scroll-trigger" href="/leagueManager/#services">Services</a>
+            <a className="nav-link js-scroll-trigger" href={process.env.PUBLIC_URL+"/#services"}>Services</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link js-scroll-trigger" href="/leagueManager/#gamesstreams">Streams</a>
+            <a className="nav-link js-scroll-trigger" href={process.env.PUBLIC_URL+"/#gamesstreams"}>Streams</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link js-scroll-trigger" href="/leagueManager/#favorites">Favorites</a>
+            <a className="nav-link js-scroll-trigger" href={process.env.PUBLIC_URL+"/#favorites"}>Favorites</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link js-scroll-trigger" href="/leagueManager/#team">Team</a>
+            <a className="nav-link js-scroll-trigger" href={process.env.PUBLIC_URL+"/#team"}>Team</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link js-scroll-trigger" href="/leagueManager/#contact">Contact</a>
+            <a className="nav-link js-scroll-trigger" href={process.env.PUBLIC_URL+"/#contact"}>Contact</a>
           </li>
         </ul>
       </div>

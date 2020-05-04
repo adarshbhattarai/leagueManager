@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 
 class Services extends Component{
-
+    //href="/"
     render(){
         return (
             <section className="page-section" id="services">
@@ -14,12 +15,12 @@ class Services extends Component{
               </div>
               <div className="row text-center">
                 <div className="col-md-4">
-                <a className="services-link" data-toggle="modal" href="/leagueManager/randomizer">
+                <Link className="services-link" data-toggle="modal"  to="/randomizer">
                   <span className="fa-stack fa-4x">
                     <i className="fa fa-circle fa-stack-2x text-primary"></i>
                     <i className="fa fa-random fa-stack-1x fa-inverse"></i>
                   </span>
-                  </a>
+                  </Link>
                   <h4 className="service-heading">Player Randomizer</h4>
                   <p className="text-muted">Add and Shuffle Players into one or many groups. </p>
                 </div>
