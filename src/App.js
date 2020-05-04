@@ -19,9 +19,9 @@ function App() {
     <Header/>
     <Router>
       <Switch>
-      <Route path="/" exact component={MainPage}></Route>
-      <Route path="/randomizer" exact component={Randomizer}></Route>
-      <Route path="/404" component={NotFound}></Route>
+      <Route path="/leagueManager/" exact component={MainPage}></Route>
+      <Route path="/leagueManager/randomizer" exact component={Randomizer}></Route>
+      <Route path="/leagueManager/404" component={NotFound}></Route>
       <Route component={NotFound}></Route>
       </Switch>
     </Router>

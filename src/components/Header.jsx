@@ -30,19 +30,19 @@ export default () => {
       <div className="collapse navbar-collapse" id="navbarResponsive">
         <ul className="navbar-nav text-uppercase ml-auto">
           <li className="nav-item">
-            <a className="nav-link js-scroll-trigger" href="/#services">Services</a>
+            <a className="nav-link js-scroll-trigger" href="/leagueManager/#services">Services</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link js-scroll-trigger" href="/#gamesstreams">Streams</a>
+            <a className="nav-link js-scroll-trigger" href="/leagueManager/#gamesstreams">Streams</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link js-scroll-trigger" href="/#favorites">Favorites</a>
+            <a className="nav-link js-scroll-trigger" href="/leagueManager/#favorites">Favorites</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link js-scroll-trigger" href="/#team">Team</a>
+            <a className="nav-link js-scroll-trigger" href="/leagueManager/#team">Team</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link js-scroll-trigger" href="/#contact">Contact</a>
+            <a className="nav-link js-scroll-trigger" href="/leagueManager/#contact">Contact</a>
           </li>
         </ul>
       </div>

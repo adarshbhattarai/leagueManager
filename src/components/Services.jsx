@@ -14,7 +14,7 @@ class Services extends Component{
               </div>
               <div className="row text-center">
                 <div className="col-md-4">
-                <a className="services-link" data-toggle="modal" href="/randomizer">
+                <a className="services-link" data-toggle="modal" href="/leagueManager/#randomizer">
                   <span className="fa-stack fa-4x">
                     <i className="fa fa-circle fa-stack-2x text-primary"></i>
                     <i className="fa fa-random fa-stack-1x fa-inverse"></i>

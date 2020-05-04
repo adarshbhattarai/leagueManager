@@ -6,7 +6,7 @@ export default class ListView extends Component{
         return(
             <ol className="list-group" style={{margin: 0, padding: 0}}>
             { this.props.listItems.map((item,index)=>(
-            <li className="list-group-item" key={index} style={{textAlign: 'left', display:'list-item' }}>{item}</li>
+            <li className="list-group-item" key={index} style={{textAlign: 'left', display:'list-item'  }}>{item}</li>
             ))
             }
             </ol>
