@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/league-manager/static/css/main.c2a8423f.chunk.css",
+    "main.js": "/league-manager/static/js/main.0139bfbb.chunk.js",
+    "main.js.map": "/league-manager/static/js/main.0139bfbb.chunk.js.map",
+    "runtime-main.js": "/league-manager/static/js/runtime-main.e09fe611.js",
+    "runtime-main.js.map": "/league-manager/static/js/runtime-main.e09fe611.js.map",
+    "static/js/2.3f85fa09.chunk.js": "/league-manager/static/js/2.3f85fa09.chunk.js",
+    "static/js/2.3f85fa09.chunk.js.map": "/league-manager/static/js/2.3f85fa09.chunk.js.map",
+    "index.html": "/league-manager/index.html",
+    "precache-manifest.3b921d23b28c2b6624c7991c18b47e3b.js": "/league-manager/precache-manifest.3b921d23b28c2b6624c7991c18b47e3b.js",
+    "service-worker.js": "/league-manager/service-worker.js",
+    "static/css/main.c2a8423f.chunk.css.map": "/league-manager/static/css/main.c2a8423f.chunk.css.map",
+    "static/js/2.3f85fa09.chunk.js.LICENSE.txt": "/league-manager/static/js/2.3f85fa09.chunk.js.LICENSE.txt",
+    "static/media/adarsh.jpg": "/league-manager/static/media/adarsh.f1113485.jpg",
+    "static/media/amrit.jpg": "/league-manager/static/media/amrit.66308110.jpg",
+    "static/media/agency.min.css": "/league-manager/static/media/map-image.f40ed5b1.png",
+    "static/media/sunil.jpg": "/league-manager/static/media/sunil.c22da35b.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e09fe611.js",
+    "static/js/2.3f85fa09.chunk.js",
+    "static/css/main.c2a8423f.chunk.css",
+    "static/js/main.0139bfbb.chunk.js"
+  ]
+}
