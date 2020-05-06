@@ -8,3 +8,24 @@ export function shuffleArray(array){
     }
     return array;
 }
+
+export function createArrayGroup(array, distribute, totalGroups){
+        var items=array;
+        var totalValuesInEachGroup =  parseInt(items.length/totalGroups);
+        var allGroups=[]
+        let i=0,namesProcessed=0;
+        for(; i<totalGroups;i++){
+            var groups = items.slice(namesProcessed,namesProcessed+totalValuesInEachGroup);
+            namesProcessed+=totalValuesInEachGroup;
+            allGroups.push(groups);
+        }
+        if(items.length%totalGroups>0){
+            var remainingNames= items.length-namesProcessed;
+            var index=items.length;
+            var chunk=totalGroups;
+            while(remainingNames-->0){
+                allGroups[distribute?--chunk:chunk-1].push(items[--index]);
+            }
+        }
+        return allGroups;
+}

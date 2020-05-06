@@ -5,7 +5,7 @@ export default class Footer extends Component{
 
     render(){
         return(
-            <footer className="footer">
+            <footer className="footer" id='footer'>
             <div className="container">
               <div className="row align-items-center">
                 <div className="col-md-4">

@@ -20,7 +20,7 @@ class Services extends Component{
                     <i className="fa fa-circle fa-stack-2x text-primary"></i>
                     <i className="fa fa-random fa-stack-1x fa-inverse"></i>
                   </span>
-                  </Link>
+                </Link>
                   <h4 className="service-heading">Player Randomizer</h4>
                   <p className="text-muted">Add and Shuffle Players into one or many groups. </p>
                 </div>
@@ -33,10 +33,12 @@ class Services extends Component{
                   <p className="text-muted">Search for a Player and Stalk Their Game Stats. You can look also look at your own History. You can also look up your games stat with that player</p>
                 </div>
                 <div className="col-md-4">
+                <Link className="services-link" data-toggle="modal"  to="/organize">
                   <span className="fa-stack fa-4x">
                     <i className="fa fa-circle fa-stack-2x text-primary"></i>
                     <i className="fa fa-futbol-o fa-stack-1x fa-inverse"></i>
                   </span>
+                  </Link>
                   <h4 className="service-heading">League Organizer</h4>
                   <p className="text-muted">Set the rule for win, loss, and draw features.</p>
                 </div>

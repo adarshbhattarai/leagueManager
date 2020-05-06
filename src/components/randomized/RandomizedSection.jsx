@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
 import ListView from "./ListView";
 import GridView from "./GridView";
+import {createArrayGroup} from '../../js/ArrayShuffle';
+import { Link } from 'react-router-dom';
 
 function head(){
     return (
@@ -18,7 +20,8 @@ function RandomizedSection(props){
     const [scroll, isScroll] = useState(false);
     const [noOfGroups, handleChange] = useState(1);
     const [distributeRemaining, distribute] = useState(true);
-    const [showGridResults, setShowResults] = useState(false)
+    const [showGridResults, setShowResults] = useState(false);
+    const [groupedItems,setGroupedItems] = useState(null);
 
 
     //Render again when randomItems changes its
@@ -50,8 +53,9 @@ function RandomizedSection(props){
                        }
                         </div>
                     </div>
+                    {noOfGroups>0 && noOfGroups<=itemLength ? <div> 
                     {
-                        itemLength%noOfGroups >0
+                        itemLength%noOfGroups >0 
                         ?
                         <div className="form-group row">
                         <div className="col col-md-6">
@@ -71,10 +75,29 @@ function RandomizedSection(props){
                             null
                     }
                     <div>
-                    <button type="button" className="btn btn-outline-success btn-lg" onClick={()=> setShowResults(true)}>PROCESS</button>
+                    <button type="button" className="btn btn-outline-success btn-lg" onClick={
+                        ()=> 
+                        {setShowResults(true);
+                         setGroupedItems(createArrayGroup(randomItems,distributeRemaining,noOfGroups))}}>PROCESS</button>
                     </div>
-                    {showGridResults?<GridView items={randomItems} noOfGroups={noOfGroups} distributeRemaining={distributeRemaining}></GridView> : null}
-                </div>
+                    {showGridResults?
+                        <div>
+                        <GridView groupedItems={groupedItems}></GridView> 
+                        <div className="col-md-6 offset-md-3">
+                        <Link to={{
+                                pathname: "/organize",
+                                state: {
+                                    groups: {groupedItems}
+                                }
+                            }}><button type="button" className="btn btn-outline-success btn-lg">Create League</button></Link>
+                        </div>
+                        </div>
+                        :
+                         null}
+                        </div>
+                        :
+                        null}
+                        </div>
             );
     }
 
