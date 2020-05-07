@@ -8,7 +8,7 @@ const Contact = () =>{
           <div className="row">
             <div className="col-lg-12 text-center">
               <h2 className="section-heading text-uppercase">Contact Us</h2>
-              <h3 className="section-subheading text-muted">Reach out games.dantakuti at games.dantakuti@gmail.com or simply send us message here.
+              <h3 className="section-subheading text-muted">Reach out games@dantakuti at games.dantakuti@gmail.com or simply send us message here.
                We go through all the responses.</h3>
             </div>
           </div>
