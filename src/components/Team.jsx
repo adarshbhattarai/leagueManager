@@ -44,7 +44,7 @@ class Team extends React.Component{
                   <div className="team-member">
                     <img className="mx-auto rounded-circle" src={sunil} alt=""/>
                     <h4>Sunil Parajuli</h4>
-                    <p className="text-muted">Lead Ideologist</p>
+                    <p className="text-muted">Lead Content Creator</p>
                     <ul className="list-inline social-buttons">
                       <li className="list-inline-item">
                         <a href="https://mobile.twitter.com/sunilparajuli0">
