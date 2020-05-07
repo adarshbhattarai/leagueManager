@@ -28,12 +28,12 @@ class Team extends React.Component{
                         </a>
                       </li>
                       <li className="list-inline-item">
-                        <a href="#something">
+                        <a href="https://www.facebook.com/amrit00977">
                           <i className="fa fa-facebook-f"></i>
                         </a>
                       </li>
                       <li className="list-inline-item">
-                        <a href="https://www.linkedin.com/in/amrit-khatiwada-50b587124/">
+                        <a href="https://www.linkedin.com/in/amrit00977">
                           <i className="fa fa-linkedin"></i>
                         </a>
                       </li>
