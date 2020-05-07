@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/leagueManager/static/css/main.adf4f00b.chunk.css",
-    "main.js": "/leagueManager/static/js/main.c214e528.chunk.js",
-    "main.js.map": "/leagueManager/static/js/main.c214e528.chunk.js.map",
+    "main.js": "/leagueManager/static/js/main.0d840577.chunk.js",
+    "main.js.map": "/leagueManager/static/js/main.0d840577.chunk.js.map",
     "runtime-main.js": "/leagueManager/static/js/runtime-main.bdb0bc38.js",
     "runtime-main.js.map": "/leagueManager/static/js/runtime-main.bdb0bc38.js.map",
     "static/js/2.e93784bd.chunk.js": "/leagueManager/static/js/2.e93784bd.chunk.js",
     "static/js/2.e93784bd.chunk.js.map": "/leagueManager/static/js/2.e93784bd.chunk.js.map",
     "index.html": "/leagueManager/index.html",
-    "precache-manifest.34528279b09d711906c5efa7f2978699.js": "/leagueManager/precache-manifest.34528279b09d711906c5efa7f2978699.js",
+    "precache-manifest.5ebe13772ea260d5342eb7e8f24a8136.js": "/leagueManager/precache-manifest.5ebe13772ea260d5342eb7e8f24a8136.js",
     "service-worker.js": "/leagueManager/service-worker.js",
     "static/css/main.adf4f00b.chunk.css.map": "/leagueManager/static/css/main.adf4f00b.chunk.css.map",
     "static/js/2.e93784bd.chunk.js.LICENSE.txt": "/leagueManager/static/js/2.e93784bd.chunk.js.LICENSE.txt",
@@ -21,6 +21,6 @@
     "static/js/runtime-main.bdb0bc38.js",
     "static/js/2.e93784bd.chunk.js",
     "static/css/main.adf4f00b.chunk.css",
-    "static/js/main.c214e528.chunk.js"
+    "static/js/main.0d840577.chunk.js"
   ]
 }
