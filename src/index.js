@@ -5,6 +5,9 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import './assets/css/bootstrap.min.css';
 import './assets/css/agency.min.css';
+import axios from 'axios';
+
+axios.defaults.baseURL = process.env.REACT_APP_SERVER_BASEURL;
 ReactDOM.render(
   <React.StrictMode>
     <App />

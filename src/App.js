@@ -13,6 +13,7 @@ import MainPage from './pages';
 import NotFound from './pages/404';
 import Randomizer from './pages/Randomizer'
 import Organizer from './pages/Organizer'
+import League from './pages/League';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <Route path="/" exact component={MainPage}></Route>
       <Route path="/randomizer" exact component={Randomizer}></Route>
       <Route path="/organize" exact component={Organizer}></Route>
+      <Route path="/league/:leagueId" exact component={League}></Route>
       <Route path="/404" component={NotFound}></Route>
       <Route component={NotFound}></Route>
       </Switch>
