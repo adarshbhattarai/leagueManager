@@ -120,8 +120,8 @@
   opacity: 0.3;
 }
 #footer {
-background-image: linear-gradient(to right, #c10f3f, #010168);
 padding: 1em;
 width: 100%;
 position: absolute;
 }
+#test{background-image: linear-gradient(to right, #c10f3f, #010168)}

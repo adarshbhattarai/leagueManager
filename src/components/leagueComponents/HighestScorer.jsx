@@ -9,8 +9,7 @@ export default class HighestScorer extends React.Component{
     render(){
         
         return(
-        <div>
-            <Table striped bordered hover variant="dark">
+            <Table striped bordered hover variant="dark" responsive>
         <thead>
           <tr>
             <th>#</th>
@@ -54,8 +53,58 @@ export default class HighestScorer extends React.Component{
             <td>Barcelona</td>
             <td>7</td>
           </tr>
+          <tr>
+            <td>5</td>
+            <td>Messi</td>
+            <td>15</td>
+            <td>8</td>
+            <td>Barcelona</td>
+            <td>7</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Messi</td>
+            <td>15</td>
+            <td>8</td>
+            <td>Barcelona</td>
+            <td>7</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>Messi</td>
+            <td>15</td>
+            <td>8</td>
+            <td>Barcelona</td>
+            <td>7</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>Messi</td>
+            <td>15</td>
+            <td>8</td>
+            <td>Barcelona</td>
+            <td>7</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>Messi</td>
+            <td>15</td>
+            <td>8</td>
+            <td>Barcelona</td>
+            <td>7</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>Messi</td>
+            <td>15</td>
+            <td>8</td>
+            <td>Barcelona</td>
+            <td>7</td>
+          </tr>
+
+
         </tbody>
       </Table>
-      </div>)
+      )
     }
 }

@@ -3,6 +3,7 @@ import Table from 'react-bootstrap/Table'
 import Fixtures from "./Fixtures";
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 export default class LeagueGroup extends React.Component{
 
     constructor(props){
@@ -17,14 +18,14 @@ export default class LeagueGroup extends React.Component{
         <Accordion defaultActiveKey="1">
         <Card>
         <Accordion.Toggle as={Card.Header} eventKey="0">
-            Click For Fixtures
+            <Button size="lg" variant="dark">Fixtures</Button>
         </Accordion.Toggle>
         <Accordion.Collapse eventKey="0">
          <Card.Body> <Fixtures games="pass games"></Fixtures> </Card.Body>
          </Accordion.Collapse>
         </Card>
         </Accordion>
-        <Table striped bordered hover variant="dark">
+        <Table striped bordered hover variant="dark" responsive>
         <thead>
           <tr>
             <th>#</th>

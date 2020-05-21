@@ -5,7 +5,10 @@ import LeagueGroup from "../components/leagueComponents/LeagueGroup";
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import HighestScorer from "../components/leagueComponents/HighestScorer";
-
+import PlayerCompare from "../components/leagueComponents/PlayerCompare";
+import Streams from '../components/leagueComponents/Streams';
+import ReactPlayer from 'react-player';
+import YouTubePlayer from 'react-player/lib/players/YouTube'
 export default class League extends Component{
 
 
@@ -15,10 +18,48 @@ export default class League extends Component{
             id:props.match.params.leagueId,
             groups:[],
             processing:true,
-            leagueName:''
+            leagueName:'',
+            playVideo:false,
+            link:'',
+            games:[{
+                name:'Adarsh v Sunil',
+                link:'5',
+                id:'1'
+            },
+            {
+                name:'Ishaan vs Amrit',
+                link:'5',
+                id:'2'
+            },
+            {
+                name:'Amrit vs Sunil',
+                link:'5',
+                id:'3'
+            },
+            {
+                name:'Saugat vs Adarsh',
+                link:'5',
+                id:'4'
+            },
+            {
+                name:'Adarsh vs Bharat',
+                link:'5',
+                id:'5'
+            },
+            {
+                name:'Adarsh vs Amrit',
+                link:'5',
+                id:'6'
+            },
+            {
+                name:'Adarsh vs Sunil',
+                link:'5',
+                id:'7'
+            }]
 
         }
         this.wrapper = React.createRef();
+        this.play=this.play.bind(this);
     }
 
     componentDidMount(){
@@ -57,9 +98,13 @@ export default class League extends Component{
 
     }
 
-    render(){ 
+    play(id){
+        this.setState({playVideo:true,link:id});
+    }
 
-        console.log(this.state)
+
+
+    render(){ 
         if(this.state.processing)
             return ( <section className="bg-light page-section" id="fullHeight">
                     <div className="container">
@@ -99,17 +144,29 @@ export default class League extends Component{
                 <hr />
                 <Row> <HighestScorer groupName="Group Number C"></HighestScorer> </Row>
                 </Col>
-                <Col>  <div> Live and Recent games
-                    </div>
+                <Col> <Row><Col>Compare Players </Col></Row> 
+                <hr />
+                 <Row><PlayerCompare></PlayerCompare>
+                </Row>
                 </Col>
             </Row>
             <hr />
+            {this.state.playVideo?
             <Row>
-                <Col>  
-                <div> Live and Recent games
-                </div>
-                </Col>
-            </Row>
+                <hr />
+                <ReactPlayer
+                    url="https://vimeo.com/417790753"
+                    width="100%"
+                    height="500px"
+                    controls={true}
+                    playing
+                    />
+            </Row> 
+
+            : null
+            }
+            <Row style={{width:'100%'}}>
+                            <Streams games={this.state.games} watch={this.play}></Streams></Row> 
             </div>
             </section>
             </div>

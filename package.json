@@ -13,6 +13,7 @@
     "jquery": "^3.5.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
+    "react-bootstrap-typeahead": "^4.2.3",
     "react-dom": "^16.13.1",
     "react-player": "^2.0.1",
     "react-router-dom": "^5.1.2",
