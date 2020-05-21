@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "9d3f5f151d95aa71a159389fee298c46",
+    "revision": "c0e0b20ff9a4d98b0c481a2441f6c576",
     "url": "/leagueManager/index.html"
   },
   {
-    "revision": "ae7cbfd09dd74ccec540",
-    "url": "/leagueManager/static/css/main.ec71a06c.chunk.css"
+    "revision": "9b532323cad8771f2795",
+    "url": "/leagueManager/static/css/main.ca48924c.chunk.css"
   },
   {
-    "revision": "19de1d7642a48cc265b5",
-    "url": "/leagueManager/static/js/2.458bcd09.chunk.js"
+    "revision": "b44be8d3eb9ffb345c67",
+    "url": "/leagueManager/static/js/2.658bc5d3.chunk.js"
   },
   {
-    "revision": "3453b8997016469371284a28c0e873e2",
-    "url": "/leagueManager/static/js/2.458bcd09.chunk.js.LICENSE.txt"
+    "revision": "d2966845b94a3318bf32eecc7af8015d",
+    "url": "/leagueManager/static/js/2.658bc5d3.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "ae7cbfd09dd74ccec540",
-    "url": "/leagueManager/static/js/main.42894f57.chunk.js"
+    "revision": "9b532323cad8771f2795",
+    "url": "/leagueManager/static/js/main.3a1f7268.chunk.js"
   },
   {
     "revision": "8bbb087042a75121ee56",
