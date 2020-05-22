@@ -4,19 +4,25 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { Link } from 'react-router-dom';
+import Lightbox from 'react-image-lightbox';
 export default class Game extends React.Component{
 
     constructor(props){
         super(props);
         this.state={
             showModal: false,
-            file:null,
+            file:[],
+            image:{
+                clicked:false,
+                selectedItem:0
+            }
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleSave = this.handleSave.bind(this);
         this.onChangeFile = this.onChangeFile.bind(this);
-        
+        this.onImageClick=this.onImageClick.bind(this);
     }
 
     handleClick(event){
@@ -33,11 +39,22 @@ export default class Game extends React.Component{
 
     onChangeFile(event){
         event.preventDefault();
+        var files=[...event.target.files,...this.state.file];
+         this.setState({
+            file:files
+         })
+    }
+
+    onImageClick(event,index){
+        event.preventDefault();
+        console.log(event.target)
         this.setState({
-            file: URL.createObjectURL(event.target.files[0])
-        })
-        console.log(event.target.files[0]);
-        console.log( this.state.prop);
+            showModal: false,
+            image:{
+                clicked:true,
+                selectedItem:index
+            }
+        });
     }
 
     ulStyle={
@@ -85,18 +102,19 @@ export default class Game extends React.Component{
                         </Row>
                         <Row>
                             Images:  </Row>
-                            <label for="imageUpload" className="btn btn-light btn-block btn-outlined">Upload Image</label>
+                            <label htmlFor="imageUpload" className="btn btn-light btn-block btn-outlined">Upload Image</label>
                             <input type='file' id="imageUpload" accept="image/*" style={{display: 'none'}} onChange={this.onChangeFile} multiple/>
-                          <Row>  <ul style={this.ulStyle}>{
-                              this.state.file &&
-                
-                            <li style={this.l1Style}>
-                            <Card style={{ width: '10rem' }}>
-                            <Card.Img variant="top" src={this.state.file} />
-                            <Card.Title>Ishaan</Card.Title>
-                            </Card>
-                            </li>
-                            
+                            <Row>  <ul style={this.ulStyle}>{
+                               this.state.file.length !==0 &&  
+                              this.state.file.map((x,index)=> 
+                                <li style={this.l1Style}>
+                              <Card style={{ width: '10rem' }}>
+                              <Link>
+                              <Card.Img variant="top" src={URL.createObjectURL(x)} key={index} onClick={(event)=>this.onImageClick(event,index)}/>
+                              </Link>
+                              </Card>
+                              </li>
+                            )
                             }
                             </ul>
                         </Row>
@@ -124,6 +142,35 @@ export default class Game extends React.Component{
                     </Modal.Footer>
                 </Modal.Dialog>
             </Modal>
+            {
+                                this.state.image.clicked && (
+                                    <Lightbox
+                                        mainSrc={URL.createObjectURL(this.state.file[this.state.image.selectedItem])}
+                                        nextSrc={this.state.file[(this.state.image.selectedItem + 1) % this.state.file.length]}
+                                        prevSrc={this.state.file[(this.state.image.selectedItem + this.state.file.length - 1) % this.state.file.length]}
+                                        onCloseRequest={() => this.setState({ image: {
+                                            clicked:false
+                                        } })}
+                                        onMovePrevRequest={() =>
+                                            this.setState({
+                                                image:{
+                                                    clicked:true,
+                                                    selectedItem: (this.state.image.selectedItem + this.state.file.length - 1) % this.state.file.length
+                                                }
+                                              
+                                            })
+                                          }
+                                          onMoveNextRequest={() =>
+                                            this.setState({
+                                                image:{
+                                                clicked:true,
+                                                selectedItem: (this.state.image.selectedItem + 1) % this.state.file.length
+                                            }
+                                            })
+                                          }
+                                    />
+                                )
+            }
              </div>
         )
     }
