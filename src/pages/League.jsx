@@ -8,7 +8,7 @@ import HighestScorer from "../components/leagueComponents/HighestScorer";
 import PlayerCompare from "../components/leagueComponents/PlayerCompare";
 import Streams from '../components/leagueComponents/Streams';
 import ReactPlayer from 'react-player';
-import { authenticationService,leagueService } from '../_services';
+import { leagueService } from '../_services';
 export default class League extends Component{
 
 
@@ -83,9 +83,9 @@ export default class League extends Component{
             </div>
             <Tabs ref={this.wrapper} defaultActiveKey='0' id="uncontrolled-tab-example" >
             {
-                this.state.groups && this.state.groups.map(({name},index) => 
+                this.state.groups && this.state.groups.map(({name,group_id},index) => 
                 <Tab eventKey={index} title={"Group " + name}>
-                <LeagueGroup groupName={name}></LeagueGroup>
+                <LeagueGroup groupName={name} groupId={group_id} leagueId={this.state.id} ></LeagueGroup>
                   </Tab>
                 )
             } 

@@ -13,8 +13,6 @@ export default class HighestScorer extends React.Component{
     componentDidMount(){
       leagueService.fetchHighestScorers(this.props.leagueId)
       .then(res=>{
-        console.log(res);
-          let data = res.data;
           this.setState({table:[...res.data]})
       }).
       catch(err=> this.setState({message:err.response}));

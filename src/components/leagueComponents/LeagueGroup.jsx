@@ -4,14 +4,23 @@ import Fixtures from "./Fixtures";
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import { groupService } from '../../_services';
 export default class LeagueGroup extends React.Component{
 
     constructor(props){
         super(props);
+        console.log(props);
+        this.state={
+          table:[]
+        }
     }
 
     componentDidMount(){
-      
+      groupService.fetchTable(this.props.leagueId, this.props.groupId)
+      .then(res=>{
+          this.setState({table:[...res.data]})
+      }).
+      catch(err=> console.log(err.response));
     }
     render(){
         
@@ -41,45 +50,28 @@ export default class LeagueGroup extends React.Component{
             <th>G.A</th>
             <th>G.D</th>
             <th>Pts</th>
+            <th>Avg</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <th>Draw</th>
-            <th>Loss</th>
-            <th>G.F</th>
-            <th>G.A</th>
-            <th>G.D</th>
-            <th>Pts</th>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <th>Draw</th>
-            <th>Loss</th>
-            <th>G.F</th>
-            <th>G.A</th>
-            <th>G.D</th>
-            <th>Pts</th>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td >Larry the Bird</td>
-            <th>3sa</th>
-            <td>@twitter</td>
-            <th>Draw</th>
-            <th>Loss</th>
-            <th>G.F</th>
-            <th>G.A</th>
-            <th>G.D</th>
-            <th>Pts</th>
-          </tr>
+          {
+            this.state.table && 
+            this.state.table.map(({name,gamesPlayed,gamesWon,gamesDrawn,gamesLost,goalsFor,goalAgainst,goalDiff,points,average},index)=>
+              <tr>
+                <td>{index+1}</td>
+                <td>{name}</td>
+                <td>{gamesPlayed}</td>
+                <td>{gamesWon}</td>
+                <th>{gamesDrawn}</th>
+                <th>{gamesLost}</th>
+                <th>{goalsFor}</th>
+                <th>{goalAgainst}</th>
+                <th>{goalDiff}</th>
+                <th>{points}</th>
+                <th>{average}</th>
+              </tr>
+            )
+          }
         </tbody>
       </Table>
       </div>)
