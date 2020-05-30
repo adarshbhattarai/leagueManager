@@ -14,6 +14,6 @@ export default class Organizer extends Component{
         if(this.state==null){
             return <OrganizeWithoutGroups></OrganizeWithoutGroups>
         }
-        else return <OrganizeWithGroups groups={this.state.groups.groupedItems} ></OrganizeWithGroups>
+        else return <OrganizeWithGroups groups={this.state.groups.groupedItems} location={this.props.location}></OrganizeWithGroups>
     }
 }

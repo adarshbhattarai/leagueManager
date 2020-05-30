@@ -8,7 +8,7 @@ import HighestScorer from "../components/leagueComponents/HighestScorer";
 import PlayerCompare from "../components/leagueComponents/PlayerCompare";
 import Streams from '../components/leagueComponents/Streams';
 import ReactPlayer from 'react-player';
-import YouTubePlayer from 'react-player/lib/players/YouTube'
+import { authenticationService,leagueService } from '../_services';
 export default class League extends Component{
 
 
@@ -21,80 +21,35 @@ export default class League extends Component{
             leagueName:'',
             playVideo:false,
             link:'',
-            games:[{
-                name:'Adarsh v Sunil',
-                link:'5',
-                id:'1'
-            },
-            {
-                name:'Ishaan vs Amrit',
-                link:'5',
-                id:'2'
-            },
-            {
-                name:'Amrit vs Sunil',
-                link:'5',
-                id:'3'
-            },
-            {
-                name:'Saugat vs Adarsh',
-                link:'5',
-                id:'4'
-            },
-            {
-                name:'Adarsh vs Bharat',
-                link:'5',
-                id:'5'
-            },
-            {
-                name:'Adarsh vs Amrit',
-                link:'5',
-                id:'6'
-            },
-            {
-                name:'Adarsh vs Sunil',
-                link:'5',
-                id:'7'
-            }]
-
+            games:[],
+            message:''
         }
         this.wrapper = React.createRef();
         this.play=this.play.bind(this);
     }
 
     componentDidMount(){
-        var res={
-            data:[
-               {
-                   formatId:1,
-               formatName:'PremIer LEAGUE'
-               } ,{
-                   formatId:2,
-                   formatName:'CHAMPIONS LEAGUE'
-               },{
-                   formatId:3,
-                   formatName:'COPA DEL LEAGUE'
-               },{
-                   formatId:4,
-                   formatName:'TRACKITT'
-               }
-               ]
-           }
-           this.setState({formats:res.data,loading:false,selectedField:res.data[0]});
-           //remove above later on.
-           console.log('OrganizeWithGroups.jsx component did mount remove')
-         /*  axios.get("/league/:id")
-           .then(res=>{
-               this.setState({formats:res.data,loading:false,selectedField:res.data[0]});
-           })
-           .catch(err=>console.error(err));*/
-           if(this.state.id==='23'){
-               this.setState({
-                   processing:false,
-                   leagueName:'Weekend League'
-                });
-           }
+        leagueService.fetchLeague(this.state.id)
+        .then(res=>{
+            console.log(res);
+            let data = res.data;
+            this.setState({
+                processing:false,
+                groups:[...data.groups],
+                leagueName:data.leagueName,
+            })
            
+        }).
+        catch(err=> this.setState({message:err.response}));
+
+        leagueService.fetchTopGames(this.state.id)
+        .then(res=>{
+            let games=res.data
+            console.log(games);
+            this.setState({
+                games:[...games]
+            })
+        })
 
     }
 
@@ -110,7 +65,9 @@ export default class League extends Component{
                     <div className="container">
                 <div className="row">
                     <div className="col-lg-12 text-center">
-                    <h3 className="section-subheading text-muted">Processing</h3>
+                    {this.state.message ? <div className={'alert alert-danger'}>{this.state.message}</div>
+                    :<h3 className="section-subheading text-muted">Processing</h3>
+                    }
                     </div>
                     </div>
                     </div>
@@ -124,16 +81,14 @@ export default class League extends Component{
                <h2 className="section-heading text-uppercase">{this.state.leagueName}</h2>
                </div>
             </div>
-            <Tabs ref={this.wrapper} defaultActiveKey="profile" id="uncontrolled-tab-example" >
-            <Tab eventKey="home" title="Group A">
-              <LeagueGroup groupName="Group Number A"></LeagueGroup>
-            </Tab>
-            <Tab eventKey="profile" title="Group B">
-            <LeagueGroup groupName="Group Number B"></LeagueGroup>
-            </Tab>
-            <Tab eventKey="contact" title="Group C">
-            <LeagueGroup groupName="Group Number C"></LeagueGroup>
-            </Tab>
+            <Tabs ref={this.wrapper} defaultActiveKey='0' id="uncontrolled-tab-example" >
+            {
+                this.state.groups && this.state.groups.map(({name},index) => 
+                <Tab eventKey={index} title={"Group " + name}>
+                <LeagueGroup groupName={name}></LeagueGroup>
+                  </Tab>
+                )
+            } 
             </Tabs>
             {//On Going Games
             }
@@ -142,7 +97,7 @@ export default class League extends Component{
                 <Col>
                 <Row><Col>Highest Scorers </Col></Row>
                 <hr />
-                <Row> <HighestScorer groupName="Group Number C"></HighestScorer> </Row>
+                <Row> <HighestScorer leagueId={this.state.id}></HighestScorer> </Row>
                 </Col>
                 <Col> <Row><Col>Compare Players </Col></Row> 
                 <hr />
@@ -155,7 +110,7 @@ export default class League extends Component{
             <Row>
                 <hr />
                 <ReactPlayer
-                    url="https://vimeo.com/417790753"
+                    url={this.state.link}
                     width="100%"
                     height="500px"
                     controls={true}

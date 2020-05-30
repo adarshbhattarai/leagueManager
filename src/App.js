@@ -14,6 +14,8 @@ import NotFound from './pages/404';
 import Randomizer from './pages/Randomizer'
 import Organizer from './pages/Organizer'
 import League from './pages/League';
+import LoginPage from './pages/LoginPage';
+import Register from './pages/Register';
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
       <Route path="/" exact component={MainPage}></Route>
       <Route path="/randomizer" exact component={Randomizer}></Route>
       <Route path="/organize" exact component={Organizer}></Route>
+      <Route path="/login" exact component={LoginPage} />
+      <Route path="/register" exact component={Register} />
       <Route path="/league/:leagueId" exact component={League}></Route>
       <Route path="/404" component={NotFound}></Route>
       <Route component={NotFound}></Route>

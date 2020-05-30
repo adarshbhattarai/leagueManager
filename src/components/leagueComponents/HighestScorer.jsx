@@ -1,9 +1,23 @@
 import React from "react";
 import Table from 'react-bootstrap/Table';
+import { leagueService } from '../../_services';
 export default class HighestScorer extends React.Component{
 
     constructor(props){
         super(props);
+        this.state = {
+            table:[]
+        }
+    }
+
+    componentDidMount(){
+      leagueService.fetchHighestScorers(this.props.leagueId)
+      .then(res=>{
+        console.log(res);
+          let data = res.data;
+          this.setState({table:[...res.data]})
+      }).
+      catch(err=> this.setState({message:err.response}));
     }
 
     render(){
@@ -16,93 +30,25 @@ export default class HighestScorer extends React.Component{
             <th>Name</th>
             <th>T.G.F</th>
             <th>Highest</th>
-            <th>Team</th>
+            <th>Fav.Team</th>
             <th>Match Played</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Ishaan</td>
-            <td>20</td>
-            <td>6</td>
-            <td>Liverpool</td>
-            <td>5</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Adarsh</td>
-            <td>19</td>
-            <td>4</td>
-            <td>Liverpool</td>
-            <td>8</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Mane</td>
-            <td>15</td>
-            <td>8</td>
-            <td>Liverpool</td>
-            <td>7</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>Messi</td>
-            <td>15</td>
-            <td>8</td>
-            <td>Barcelona</td>
-            <td>7</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>Messi</td>
-            <td>15</td>
-            <td>8</td>
-            <td>Barcelona</td>
-            <td>7</td>
-          </tr>
-          <tr>
-            <td>6</td>
-            <td>Messi</td>
-            <td>15</td>
-            <td>8</td>
-            <td>Barcelona</td>
-            <td>7</td>
-          </tr>
-          <tr>
-            <td>7</td>
-            <td>Messi</td>
-            <td>15</td>
-            <td>8</td>
-            <td>Barcelona</td>
-            <td>7</td>
-          </tr>
-          <tr>
-            <td>8</td>
-            <td>Messi</td>
-            <td>15</td>
-            <td>8</td>
-            <td>Barcelona</td>
-            <td>7</td>
-          </tr>
-          <tr>
-            <td>9</td>
-            <td>Messi</td>
-            <td>15</td>
-            <td>8</td>
-            <td>Barcelona</td>
-            <td>7</td>
-          </tr>
-          <tr>
-            <td>10</td>
-            <td>Messi</td>
-            <td>15</td>
-            <td>8</td>
-            <td>Barcelona</td>
-            <td>7</td>
-          </tr>
-
-
+          {
+            this.state.table.map(
+              ({player,goalsFor,highestScore,gamesPlayed},index)=>
+              <tr>
+                  <td>{index+1}</td>
+                  <td>{player.fullname}</td>
+                  <td>{goalsFor}</td>
+                  <td>{highestScore}</td>
+                  <td>{player.favoriteTeam || " - "}</td>
+                  <td>{gamesPlayed}</td>
+                </tr>
+              
+            )
+          }
         </tbody>
       </Table>
       )

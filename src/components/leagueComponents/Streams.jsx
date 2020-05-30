@@ -5,6 +5,7 @@ export default class Streams extends React.Component{
 
     constructor(props){
         super(props);
+        console.log(props);
     }
 
     ulStyle={
@@ -28,15 +29,15 @@ export default class Streams extends React.Component{
             <ul style={this.ulStyle}>
             {
             
-                this.props.games.map(({name},index)=>
+                this.props.games.map(ele=>
                 
                 <li style={this.l1Style}>
                 <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src="https://i.ytimg.com/vi/qFwcahcDzP4/hqdefault.jpg" />
-                <Card.Title>{name}</Card.Title>
+                <Card.Img variant="top" src={ele[2]} />
+                <Card.Title>{ele[0]}</Card.Title>
                 <Card.Body>
                     <Card.Text>
-                    <Button variant="success" onClick={()=>this.props.watch("ASD")}>Watch</Button>
+                    <Button variant="success" onClick={()=>this.props.watch(ele[1])}>Watch</Button>
                     </Card.Text>
                 </Card.Body>
                 </Card>

@@ -32,7 +32,7 @@ export default class Game extends React.Component{
     handleClose(){
         this.setState({showModal:false});
     }
-
+8
     handleSave(){
         this.setState({showModal:false});
     }

@@ -10,6 +10,9 @@ export default class LeagueGroup extends React.Component{
         super(props);
     }
 
+    componentDidMount(){
+      
+    }
     render(){
         
         return(

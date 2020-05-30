@@ -6,6 +6,7 @@ import './Org.css'
 import axios from 'axios';
 import Dropdown from 'react-bootstrap/Dropdown'
 import { Redirect } from 'react-router'
+import { authenticationService,leagueService } from '../../_services';
 export default class OrganizeWithGroups extends React.Component{
 
     constructor(props){
@@ -19,41 +20,29 @@ export default class OrganizeWithGroups extends React.Component{
             selectedField:'',
             leagueName:'',
             leagueCreated:false,
-
+            redirectTologin:false,
+            unauthorized:'',
+            leagueId:''
         }
     }
 
     componentDidMount(){
-
-        var res={
-         data:[
-            {
-                formatId:1,
-            formatName:'PremIer LEAGUE'
-            } ,{
-                formatId:2,
-                formatName:'CHAMPIONS LEAGUE'
-            },{
-                formatId:3,
-                formatName:'COPA DEL LEAGUE'
-            },{
-                formatId:4,
-                formatName:'TRACKITT'
-            }
-            ]
-        }
-        this.setState({formats:res.data,loading:false,selectedField:res.data[0]});
-        //remove above later on.
-        console.log('OrganizeWithGroups.jsx component did mount remove')
         axios.get("/formats/")
         .then(res=>{
+            console.log(res)
             this.setState({formats:res.data,loading:false,selectedField:res.data[0]});
         })
         .catch(err=>console.error(err));
         
     }
-    handleSubmit(){
-        function   format(groups){
+    handleSubmit(event){
+        event.preventDefault();
+        const currentUser = authenticationService.currentUserValue;
+        if(!currentUser){
+            this.setState({redirectTologin:true});
+            return;
+        }
+        function  format(groups){
                  var items = [] ;
                  var ind=0;
                  groups.map(ele=>{
@@ -64,7 +53,8 @@ export default class OrganizeWithGroups extends React.Component{
                     });
                     ele.map(pName=>{
                         items[ind].players.push({
-                            psId:-1,
+                            playerId:-1,
+                            psId:null,
                             name:pName
                         })
                     })
@@ -72,24 +62,11 @@ export default class OrganizeWithGroups extends React.Component{
                  })
                  return items;
             }
-        const data={
-            'leagueName':this.state.leagueName,
-            'groups':format(this.props.groups),
-            'formatId':this.state.selectedField.formatId
-        }
-        const header={
-            'Content-Type': 'application/json'
-        }
-        axios.post('/league/create',data,header)
+       
+        leagueService.createLeague(this.state.leagueName,format(this.props.groups),this.state.selectedField.formatId)
         .then(res=>{
-            console.log(res);
-            this.setState({...this.state, leagueCreated:true});
-        })
-        .catch(err=> console.log(err));
-
-        console.log('handleSubmit OrganizeWithGroups reroute only on success');
-        //Onsucess set 
-        this.setState({...this.state, leagueCreated:true});
+            this.setState({...this.state, leagueCreated:true,leagueId:res.data.message});
+        }).catch(err=> this.setState({unauthorized:err.response.data.message}));
     }
     handleChange(val){
        this.setState({...this.state,selectedField:val});
@@ -103,8 +80,14 @@ export default class OrganizeWithGroups extends React.Component{
     render(){
         if(this.props==null)
         return(<OrganizeWithoutGroups/>)
+
+        if(this.state.redirectTologin){
+            // not logged in so redirect to login page with the return url
+            console.log(this.props.location)
+            return <Redirect to={{ pathname: '/login', state: { from: this.props.location } }} />
+        }
         if (this.state.leagueCreated) {
-            return <Redirect to = {{ pathname: "/league/23" }} />;
+            return <Redirect to = {{ pathname: "/league/"+this.state.leagueId}} />;
           }
         return(
 
@@ -146,6 +129,13 @@ export default class OrganizeWithGroups extends React.Component{
                 <GridView groupedItems={this.props.groups}></GridView>
                 </div>
                 <button type="button" style={{marginTop:'3em'}}className="btn btn-outline-success btn-lg" onClick={this.handleSubmit}>Create League</button>
+                {
+                    this.state.unauthorized &&  <Row className="justify-content-md-center">
+                            <Col xs={6} md={4} className={'alert alert-danger'}>
+                            {this.state.unauthorized }
+                                    </Col>
+                        </Row>
+                }
            </section>
         )
     }
