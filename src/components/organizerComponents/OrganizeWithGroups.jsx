@@ -83,7 +83,6 @@ export default class OrganizeWithGroups extends React.Component{
 
         if(this.state.redirectTologin){
             // not logged in so redirect to login page with the return url
-            console.log(this.props.location)
             return <Redirect to={{ pathname: '/login', state: { from: this.props.location } }} />
         }
         if (this.state.leagueCreated) {

@@ -1,6 +1,5 @@
 import { BehaviorSubject } from 'rxjs';
 
-import { handleResponse } from '../_helpers';
 import axios from 'axios';
 
 const currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('currentUser')));

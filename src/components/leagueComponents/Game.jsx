@@ -107,7 +107,7 @@ export default class Game extends React.Component{
                             <Row>  <ul style={this.ulStyle}>{
                                this.state.file.length !==0 &&  
                               this.state.file.map((x,index)=> 
-                                <li style={this.l1Style}>
+                                <li key={index} style={this.l1Style}>
                               <Card style={{ width: '10rem' }}>
                               <Link>
                               <Card.Img variant="top" src={URL.createObjectURL(x)} key={index} onClick={(event)=>this.onImageClick(event,index)}/>
@@ -122,9 +122,9 @@ export default class Game extends React.Component{
                             Videos: <input type="text" className="form-control" placeholder="provide video url" min="1"/>
                          <button>Add Url</button> </Row>
                          <ul style={this.ulStyle}>{
-                            this.props.team.map((index)=>
+                            this.props.team.map((element, index)=>
                 
-                            <li style={this.l1Style}>
+                            <li key={index} style={this.l1Style}>
                             <Card style={{ width: '10rem' }}>
                             <Card.Img variant="top" src="https://i.ytimg.com/vi/qFwcahcDzP4/hqdefault.jpg" />
                             <Card.Title>Ishaan</Card.Title>

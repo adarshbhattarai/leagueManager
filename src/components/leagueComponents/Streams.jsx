@@ -3,11 +3,6 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 export default class Streams extends React.Component{
 
-    constructor(props){
-        super(props);
-        console.log(props);
-    }
-
     ulStyle={
         overflowX: 'scroll',
         listStyle: 'none',
@@ -29,9 +24,9 @@ export default class Streams extends React.Component{
             <ul style={this.ulStyle}>
             {
             
-                this.props.games.map(ele=>
+                this.props.games.map((ele,index)=>
                 
-                <li style={this.l1Style}>
+                <li key={index} style={this.l1Style}>
                 <Card style={{ width: '18rem' }}>
                 <Card.Img variant="top" src={ele[2]} />
                 <Card.Title>{ele[0]}</Card.Title>

@@ -1,4 +1,3 @@
-import { authHeader } from '../_helpers';
 import axios from 'axios';
 
 export const groupService = {

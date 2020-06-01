@@ -31,7 +31,6 @@ export default class League extends Component{
     componentDidMount(){
         leagueService.fetchLeague(this.state.id)
         .then(res=>{
-            console.log(res);
             let data = res.data;
             this.setState({
                 processing:false,
@@ -39,13 +38,11 @@ export default class League extends Component{
                 leagueName:data.leagueName,
             })
            
-        }).
-        catch(err=> this.setState({message:err.response}));
+        }).catch(err=> this.setState({message:err.response}));
 
         leagueService.fetchTopGames(this.state.id)
         .then(res=>{
-            let games=res.data
-            console.log(games);
+            let games=res.data;
             this.setState({
                 games:[...games]
             })
@@ -84,7 +81,7 @@ export default class League extends Component{
             <Tabs ref={this.wrapper} defaultActiveKey='0' id="uncontrolled-tab-example" >
             {
                 this.state.groups && this.state.groups.map(({name,group_id},index) => 
-                <Tab eventKey={index} title={"Group " + name}>
+                <Tab key={index} eventKey={index} title={"Group " + name}>
                 <LeagueGroup groupName={name} groupId={group_id} leagueId={this.state.id} ></LeagueGroup>
                   </Tab>
                 )

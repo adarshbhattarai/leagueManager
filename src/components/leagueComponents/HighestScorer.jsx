@@ -14,8 +14,7 @@ export default class HighestScorer extends React.Component{
       leagueService.fetchHighestScorers(this.props.leagueId)
       .then(res=>{
           this.setState({table:[...res.data]})
-      }).
-      catch(err=> this.setState({message:err.response}));
+      }).catch(err=> this.setState({message:err.response}));
     }
 
     render(){
@@ -36,7 +35,7 @@ export default class HighestScorer extends React.Component{
           {
             this.state.table.map(
               ({player,goalsFor,highestScore,gamesPlayed},index)=>
-              <tr>
+              <tr key={index}>
                   <td>{index+1}</td>
                   <td>{player.fullname}</td>
                   <td>{goalsFor}</td>

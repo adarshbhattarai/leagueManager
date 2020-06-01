@@ -1,6 +1,5 @@
 import React from "react";
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Game from "./Game";
 import { groupService } from '../../_services';
 export default class Fixtures extends React.Component{
@@ -36,8 +35,7 @@ export default class Fixtures extends React.Component{
             });
             })
             this.setState({data:[...values]});
-        }).
-        catch(err=> console.log(err.response));
+        }).catch(err=> console.log(err.response));
     }
 
     render(){

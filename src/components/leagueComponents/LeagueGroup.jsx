@@ -20,8 +20,7 @@ export default class LeagueGroup extends React.Component{
       groupService.fetchTable(this.props.leagueId, this.props.groupId)
       .then(res=>{
           this.setState({table:[...res.data]})
-      }).
-      catch(err=> console.log(err.response));
+      }).catch(err=> console.log(err.response));
     }
     render(){
         
@@ -58,7 +57,7 @@ export default class LeagueGroup extends React.Component{
           {
             this.state.table && 
             this.state.table.map(({name,gamesPlayed,gamesWon,gamesDrawn,gamesLost,goalsFor,goalAgainst,goalDiff,points,average},index)=>
-              <tr>
+              <tr key={index}>
                 <td>{index+1}</td>
                 <td>{name}</td>
                 <td>{gamesPlayed}</td>
