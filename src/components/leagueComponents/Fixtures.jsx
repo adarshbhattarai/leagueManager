@@ -2,60 +2,51 @@ import React from "react";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Game from "./Game";
+import { groupService } from '../../_services';
 export default class Fixtures extends React.Component{
 
     constructor(props){
         super(props);
         this.state={
-            data:[
-                {
-                games:['Adarsh','Ishaan'],
-                score:[2,5],
-                psId:['aastha03','ishaan01'],
-                team:['liv','liverpool']
-                },
-                {
-                    games:['Amrit','Ishaan'],
-                    score:[2,3],
-                    psId:['aastha03','ishaan01'],
-                team:['liv','liverpool']
-                },
-                {
-                    games:['Amrit','Sunil'],
-                    score:[2,1],
-                    psId:['aastha03','ishaan01'],
-                team:['liv','liverpool']
-                },
-                {
-                    games:['Adarsh','Sunil'],
-                    score:[5,6],
-                    psId:['aastha03','ishaan01'],
-                team:['liv','liverpool']
-                },
-                {
-                    games:['Sunil','Amrit'],
-                    score:[3,4],
-                    psId:['aastha03','ishaan01'],
-                team:['liv','liverpool']
-                },
-                {
-                    games:['Ishaan','Sunil'],
-                    score:[5,3],
-                    psId:['aastha03','ishaan01'],
-                team:['liv','liverpool']
-                }
-
-                ]
+            data:[]
         }
+    }
+
+    componentDidMount(){
+
+        groupService.getGames(this.props.leagueId, this.props.groupId)
+        .then(res=>{
+            var values=[];
+            res.data.map((game,i)=>{
+               var games = [game.homePlayer, game.awayPlayer];
+               var psId=[game.homePlayerId.psId, game.awayPlayerId.psId];
+               var team=[game.homePlayerId.favoriteTeam, game.awayPlayerId.favoriteTeam];
+               var ids=[game.homePlayerId, game.awayPlayerId];
+               var score=[]
+               if(game.stat!=="NOT_PLAYED"){
+                    score=[game.homeScore, game.awayScore]
+               }
+               values.push({
+                games:games,
+                score:score,
+                psId:psId,
+                team:team,
+                ids:ids,
+                stat:game.stat
+            });
+            })
+            this.setState({data:[...values]});
+        }).
+        catch(err=> console.log(err.response));
     }
 
     render(){
         
         return(
             <Row>
-            {
-            this.state.data.map(({games,score,psId,team},index)=>
-                <Game game={games} score={score} psId={psId} team={team} key = {index}></Game>
+             {
+            this.state.data.map(({games,score,psId,team,stat},index)=>
+                <Game game={games} score={score} psId={psId} team={team} stat={stat}key = {index}></Game>
             )
             }
             </Row>

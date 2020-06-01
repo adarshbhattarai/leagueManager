@@ -9,13 +9,14 @@ export default class LeagueGroup extends React.Component{
 
     constructor(props){
         super(props);
-        console.log(props);
         this.state={
-          table:[]
+          table:[],
+          games:[]
         }
     }
 
     componentDidMount(){
+      //Get group table
       groupService.fetchTable(this.props.leagueId, this.props.groupId)
       .then(res=>{
           this.setState({table:[...res.data]})
@@ -33,7 +34,7 @@ export default class LeagueGroup extends React.Component{
             <Button size="lg" variant="dark">Fixtures</Button>
         </Accordion.Toggle>
         <Accordion.Collapse eventKey="0">
-         <Card.Body> <Fixtures games="pass games"></Fixtures> </Card.Body>
+         <Card.Body> <Fixtures leagueId={this.props.leagueId} groupId={this.props.groupId}></Fixtures> </Card.Body>
          </Accordion.Collapse>
         </Card>
         </Accordion>

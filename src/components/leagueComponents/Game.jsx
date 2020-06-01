@@ -78,7 +78,7 @@ export default class Game extends React.Component{
             <Card style={{ width: '16rem' }}>
             <Card.Body>
                 <Card.Text>
-                    {this.props.game[0]} <Button variant="dark" onClick={this.handleClick}>{this.props.score[0]+"-"+this.props.score[1]}</Button> {this.props.game[1]}</Card.Text>
+                    {this.props.game[0]} <Button variant="dark" onClick={this.handleClick}>{this.props.stat==="NOT_PLAYED"?"TBD":this.props.score[0]+"-"+this.props.score[1]}</Button> {this.props.game[1]}</Card.Text>
             </Card.Body>
             </Card>
              <Modal size="md" show={this.state.showModal} onHide={this.handleClose} centered> 
