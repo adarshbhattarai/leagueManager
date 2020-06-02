@@ -9,6 +9,8 @@ import PlayerCompare from "../components/leagueComponents/PlayerCompare";
 import Streams from '../components/leagueComponents/Streams';
 import ReactPlayer from 'react-player';
 import { leagueService } from '../_services';
+import {LeagueContext} from '../_provider/LeagueContext';
+
 export default class League extends Component{
 
 
@@ -16,6 +18,7 @@ export default class League extends Component{
         super(props);
         this.state={
             id:props.match.params.leagueId,
+            leagueData:[],
             groups:[],
             processing:true,
             leagueName:'',
@@ -36,6 +39,7 @@ export default class League extends Component{
                 processing:false,
                 groups:[...data.groups],
                 leagueName:data.leagueName,
+                leagueData:[data]
             })
            
         }).catch(err=> this.setState({message:err.response}));
@@ -55,7 +59,6 @@ export default class League extends Component{
     }
 
 
-
     render(){ 
         if(this.state.processing)
             return ( <section className="bg-light page-section" id="fullHeight">
@@ -70,7 +73,8 @@ export default class League extends Component{
                     </div>
                 </section>)
         return (
-            <div >
+            <LeagueContext.Provider value={{state:this.state}}>
+            <div>
             <section className="bg-light page-section" id="fullHeight">
             <div className="container">
            <div className="row">
@@ -80,9 +84,9 @@ export default class League extends Component{
             </div>
             <Tabs ref={this.wrapper} defaultActiveKey='0' id="uncontrolled-tab-example" >
             {
-                this.state.groups && this.state.groups.map(({name,group_id},index) => 
-                <Tab key={index} eventKey={index} title={"Group " + name}>
-                <LeagueGroup groupName={name} groupId={group_id} leagueId={this.state.id} ></LeagueGroup>
+                this.state.groups && this.state.groups.map((element,index) => 
+                <Tab key={index} eventKey={index} title={"Group " + element.name}>
+                <LeagueGroup groupName={element.name} groupId={element.group_id} leagueId={this.state.id} data={element}></LeagueGroup>
                   </Tab>
                 )
             } 
@@ -117,11 +121,15 @@ export default class League extends Component{
 
             : null
             }
+
+            
             <Row style={{width:'100%'}}>
                             <Streams games={this.state.games} watch={this.play}></Streams></Row> 
+            
             </div>
             </section>
             </div>
+            </LeagueContext.Provider>
         )
     }
 }

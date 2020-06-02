@@ -44,7 +44,7 @@ export default class Fixtures extends React.Component{
             <Row>
              {
             this.state.data.map(({games,score,psId,team,stat},index)=>
-                <Game game={games} score={score} psId={psId} team={team} stat={stat}key = {index}></Game>
+                <Game game={games} score={score} psId={psId} team={team} stat={stat} groupId={this.props.groupId} key = {index}></Game>
             )
             }
             </Row>

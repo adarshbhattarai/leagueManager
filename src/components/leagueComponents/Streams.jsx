@@ -1,8 +1,13 @@
-import React from "react";
+import React,{useContext} from "react";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+
 export default class Streams extends React.Component{
 
+
+    constructor(props){
+        super(props);
+    }
     ulStyle={
         overflowX: 'scroll',
         listStyle: 'none',

@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useContext} from "react";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -6,6 +6,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Link } from 'react-router-dom';
 import Lightbox from 'react-image-lightbox';
+import {LeagueContext} from '../../_provider/LeagueContext';
+
+import { authenticationService } from '../../_services';
 export default class Game extends React.Component{
 
     constructor(props){
@@ -16,16 +19,20 @@ export default class Game extends React.Component{
             image:{
                 clicked:false,
                 selectedItem:0
-            }
+            },
+            auth:false,
+            groupId:this.props.groupId
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleSave = this.handleSave.bind(this);
         this.onChangeFile = this.onChangeFile.bind(this);
         this.onImageClick=this.onImageClick.bind(this);
+        this.auth = this.auth.bind(this)
     }
 
     handleClick(event){
+        console.log(this.props)
         this.setState({showModal:true});
     }
 
@@ -47,7 +54,6 @@ export default class Game extends React.Component{
 
     onImageClick(event,index){
         event.preventDefault();
-        console.log(event.target)
         this.setState({
             showModal: false,
             image:{
@@ -65,14 +71,54 @@ export default class Game extends React.Component{
         position:'relative'
 
     }
+    componentDidMount(){
 
+    }
+
+    auth(leagueData, groupId){
+        const currentUser = authenticationService.currentUserValue;
+        if(!currentUser){
+            return false;
+        }
+        const username =  currentUser.username;
+        if(currentUser.roles.includes("ROLE_ADMIN")){
+            console.log("User is admin allow");
+            return true;
+        }
+        leagueData.leagueData[0].league_admins.find(
+            (admins)=>{
+                if(admins.psId===username){
+                    console.log("LeagueAdmin");
+                    return true;
+                }
+            }
+        )
+        const element = leagueData.groups.filter((group)=>
+            group.group_id===groupId
+        ).map(
+            (items)=>
+                items.group_admins 
+        ).find((item)=>{
+            return item.psId===username });
+
+        return typeof element === "undefined" ? false : true;
+           
+        //return false;
+    }
     l1Style={
         display: 'inline-block',
         padding: '8px 16px',
         marginRight: '16px'
     }
     render(){
-        
+         if(1==1){
+             return(<LeagueContext.Consumer>
+                 {
+                 (context)=>(
+                      this.auth(context.state,this.state.groupId) ? <p>Unauthorized</p> : <p>Authorized</p>
+                 )}
+             </LeagueContext.Consumer>)
+         }else
         return(
             <div>
             <Card style={{ width: '16rem' }}>
@@ -92,12 +138,22 @@ export default class Game extends React.Component{
                             <Col xs={6} md={6}>
                             <Row><p>psId: {this.props.psId[0]}</p></Row>
                             <Row><p>team: {this.props.team[0]}</p></Row>
-                            <Row><p>score: {this.props.score[0]}</p></Row>
+                            <Row><p>score: 
+
+                            <div className="col col-md-1" >
+                        <input type="number" className="form-control"  />
+                        </div>
+                            {this.props.score[0]}
+                            
+                            </p></Row>
                             </Col>
                             <Col xs={6} md={6}>
                             <Row><p>psId: {this.props.psId[1]}</p></Row>
                             <Row><p>team: {this.props.team[1]}</p></Row>
-                            <Row><p>score: {this.props.score[1]}</p></Row>
+                            <Row><p>score: <div className="col col-md-1" >
+                        <input type="number" className="form-control"  />
+                        </div>
+                        {this.props.score[1]}</p></Row>
                             </Col>
                         </Row>
                         <Row>
