@@ -21,13 +21,20 @@ export default class Game extends React.Component{
                 selectedItem:0
             },
             auth:false,
-            groupId:this.props.groupId
+            groupId:this.props.groupId,
+            homePlayerScore:0,
+            awayPlayerScore:0,
+            videoLinks:[],
+            videoLink:'',
+            consumed:false
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleSave = this.handleSave.bind(this);
         this.onChangeFile = this.onChangeFile.bind(this);
         this.onImageClick=this.onImageClick.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.addVideoLinks = this.addVideoLinks.bind(this);
         this.auth = this.auth.bind(this)
     }
 
@@ -35,6 +42,15 @@ export default class Game extends React.Component{
         console.log(this.props)
         this.setState({showModal:true});
     }
+
+    handleInputChange(event) {
+        const target = event.target;
+        const name = target.name;
+    
+        this.setState({
+          [name]: target.value
+        });
+      }
 
     handleClose(){
         this.setState({showModal:false});
@@ -71,8 +87,11 @@ export default class Game extends React.Component{
         position:'relative'
 
     }
-    componentDidMount(){
-
+    addVideoLinks(event){
+        event.preventDefault();
+        if(this.state.videoLink){
+            this.setState({videoLinks:[...this.state.videoLinks,this.state.videoLink],videoLink:''})
+        }
     }
 
     auth(leagueData, groupId){
@@ -100,7 +119,6 @@ export default class Game extends React.Component{
                 items.group_admins 
         ).find((item)=>{
             return item.psId===username });
-
         return typeof element === "undefined" ? false : true;
            
         //return false;
@@ -110,15 +128,9 @@ export default class Game extends React.Component{
         padding: '8px 16px',
         marginRight: '16px'
     }
+
+
     render(){
-         if(1==1){
-             return(<LeagueContext.Consumer>
-                 {
-                 (context)=>(
-                      this.auth(context.state,this.state.groupId) ? <p>Unauthorized</p> : <p>Authorized</p>
-                 )}
-             </LeagueContext.Consumer>)
-         }else
         return(
             <div>
             <Card style={{ width: '16rem' }}>
@@ -134,33 +146,63 @@ export default class Game extends React.Component{
                     </Modal.Header>
 
                     <Modal.Body>
+                    {
+                        this.state.consumed?null:
+                    <LeagueContext.Consumer>
+                            {
+                            (context)=>(
+                                this.setState({consumed:true,auth:this.auth(context.state,this.state.groupId)}) 
+                            )}
+                    </LeagueContext.Consumer>
+                    }
                         <Row className="show-grid">
                             <Col xs={6} md={6}>
                             <Row><p>psId: {this.props.psId[0]}</p></Row>
                             <Row><p>team: {this.props.team[0]}</p></Row>
-                            <Row><p>score: 
+                            <Row><label><p>score: 
 
                             <div className="col col-md-1" >
-                        <input type="number" className="form-control"  />
+                            { this.state.auth? 
+                            <input
+                             name="homePlayerScore"
+                             type="number"
+                             value={this.state.homePlayerScore}
+                             onChange={this.handleInputChange} />
+                             : null
+                            }
                         </div>
                             {this.props.score[0]}
                             
-                            </p></Row>
+                            </p></label></Row>
                             </Col>
                             <Col xs={6} md={6}>
                             <Row><p>psId: {this.props.psId[1]}</p></Row>
                             <Row><p>team: {this.props.team[1]}</p></Row>
-                            <Row><p>score: <div className="col col-md-1" >
-                        <input type="number" className="form-control"  />
-                        </div>
-                        {this.props.score[1]}</p></Row>
+                            <Row><label><p>score: <div className="col col-md-1" >
+                            {
+                             this.state.auth? 
+                             <input
+                             name="awayPlayerScore"
+                             type="number"
+                             value={this.state.awayPlayerScore}
+                             onChange={this.handleInputChange} />: null
+                            }
+                            </div>
+                            {this.props.score[1]}</p></label>
+                        </Row>
                             </Col>
                         </Row>
                         <Row>
-                            Images:  </Row>
-                            <label htmlFor="imageUpload" className="btn btn-light btn-block btn-outlined">Upload Image</label>
-                            <input type='file' id="imageUpload" accept="image/*" style={{display: 'none'}} onChange={this.onChangeFile} multiple/>
-                            <Row>  <ul style={this.ulStyle}>{
+                           Images: 
+                            {this.state.auth? 
+                                <div>
+                                <label htmlFor="imageUpload" className="btn btn-light btn-block btn-outlined">Upload Image</label>
+                                <input type='file' id="imageUpload" accept="image/*" style={{display: 'none'}} onChange={this.onChangeFile} multiple/>
+                                </div>
+                            :
+                             null
+                            }
+                              <ul style={this.ulStyle}>{
                                this.state.file.length !==0 &&  
                               this.state.file.map((x,index)=> 
                                 <li key={index} style={this.l1Style}>
@@ -174,9 +216,34 @@ export default class Game extends React.Component{
                             }
                             </ul>
                         </Row>
-                        <Row>
-                            Videos: <input type="text" className="form-control" placeholder="provide video url" min="1"/>
-                         <button>Add Url</button> </Row>
+                            Videos: 
+                            {
+                             this.state.auth?
+                             <div> 
+                            <Row>
+                             <input
+                             name="videoLink"
+                             type="text"
+                             placeholder="provide video url"
+                             className="form-control"
+                             value={this.state.videoLink}
+                             onChange={this.handleInputChange} />
+                             <button onClick={this.addVideoLinks}>Add Url</button> 
+                             </Row>
+                             <u1>{
+                                 this.state.videoLinks.map((element,index)=>
+                                    <li key={index}>
+                                            {element}
+                                    </li>
+                                 )
+                                }
+                                 
+                             </u1>
+                             </div>
+                             : 
+                             null
+                            }
+                        
                          <ul style={this.ulStyle}>{
                             this.props.team.map((element, index)=>
                 
@@ -186,7 +253,6 @@ export default class Game extends React.Component{
                             <Card.Title>Ishaan</Card.Title>
                             </Card>
                             </li>
-                            
                             )
                             }
                             </ul>
@@ -194,7 +260,9 @@ export default class Game extends React.Component{
 
                     <Modal.Footer>
                         <Button variant="dark" onClick={this.handleClose}>Close</Button>
-                        <Button variant="dark" onClick={this.handleSave}>Save changes</Button>
+                        {
+                             this.state.auth? <Button variant="dark" onClick={this.handleSave}>Save/Update changes</Button> : null
+                        }
                     </Modal.Footer>
                 </Modal.Dialog>
             </Modal>

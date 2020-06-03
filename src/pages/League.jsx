@@ -42,7 +42,7 @@ export default class League extends Component{
                 leagueData:[data]
             })
            
-        }).catch(err=> this.setState({message:err.response}));
+        }).catch(err=> this.setState({message:err.response.data.message}));
 
         leagueService.fetchTopGames(this.state.id)
         .then(res=>{
