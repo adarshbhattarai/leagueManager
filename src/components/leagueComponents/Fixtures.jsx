@@ -21,17 +21,22 @@ export default class Fixtures extends React.Component{
                var psId=[game.homePlayerId.psId, game.awayPlayerId.psId];
                var team=[game.homePlayerId.favoriteTeam, game.awayPlayerId.favoriteTeam];
                var ids=[game.homePlayerId, game.awayPlayerId];
-               var score=[]
+               var score=[];
+               var images=game.images;
+               var videos=game.videos;
                if(game.stat!=="NOT_PLAYED"){
                     score=[game.homeScore, game.awayScore]
                }
                values.push({
+                gameId:game.gameId,
                 games:games,
                 score:score,
                 psId:psId,
                 team:team,
                 ids:ids,
-                stat:game.stat
+                stat:game.stat,
+                images:images,
+                videos:videos
             });
             })
             this.setState({data:[...values]});
@@ -43,8 +48,8 @@ export default class Fixtures extends React.Component{
         return(
             <Row>
              {
-            this.state.data.map(({games,score,psId,team,stat},index)=>
-                <Game game={games} score={score} psId={psId} team={team} stat={stat} groupId={this.props.groupId} key = {index}></Game>
+            this.state.data.map(({gameId,games,score,psId,team,stat,images,videos},index)=>
+                <Game gameId={gameId} game={games} score={score} psId={psId} team={team} stat={stat} images={images} videos={videos} groupId={this.props.groupId} key={index}></Game>
             )
             }
             </Row>

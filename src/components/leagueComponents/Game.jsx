@@ -9,6 +9,7 @@ import Lightbox from 'react-image-lightbox';
 import {LeagueContext} from '../../_provider/LeagueContext';
 
 import { authenticationService } from '../../_services';
+import {gameService} from  '../../_services';
 export default class Game extends React.Component{
 
     constructor(props){
@@ -39,7 +40,6 @@ export default class Game extends React.Component{
     }
 
     handleClick(event){
-        console.log(this.props)
         this.setState({showModal:true});
     }
 
@@ -55,13 +55,35 @@ export default class Game extends React.Component{
     handleClose(){
         this.setState({showModal:false});
     }
-8
-    handleSave(){
+    handleSave(event){
+        event.preventDefault();
+        var saveObject={
+            homePlayerScore:this.state.homePlayerScore,
+            awayPlayerScore:this.state.awayPlayerScore,
+            groupId:this.state.groupId,
+            videoLinks:this.state.videoLinks,
+            images:this.state.file,
+            gameId:this.props.gameId
+        }
+        let formData = new FormData();
+        formData.append('homePlayerScore',saveObject.homePlayerScore)
+        formData.append('awayPlayerScore',saveObject.awayPlayerScore)
+        formData.append('groupId',saveObject.groupId)
+        formData.append('gameId',saveObject.gameId)
+        formData.append('videoLinks',saveObject.videoLinks)
+        
+        this.state.file.map((file)=>{
+            formData.append('images',file)
+        })
+
+
+        gameService._gameUpdate(formData);
         this.setState({showModal:false});
     }
 
     onChangeFile(event){
         event.preventDefault();
+        console.log(event.target.files)
         var files=[...event.target.files,...this.state.file];
          this.setState({
             file:files
@@ -151,7 +173,7 @@ export default class Game extends React.Component{
                     <LeagueContext.Consumer>
                             {
                             (context)=>(
-                                this.setState({consumed:true,auth:this.auth(context.state,this.state.groupId)}) 
+                               this.setState({consumed:true,auth:this.auth(context.state,this.state.groupId)}) 
                             )}
                     </LeagueContext.Consumer>
                     }
@@ -178,7 +200,7 @@ export default class Game extends React.Component{
                             <Col xs={6} md={6}>
                             <Row><p>psId: {this.props.psId[1]}</p></Row>
                             <Row><p>team: {this.props.team[1]}</p></Row>
-                            <Row><label><p>score: <div className="col col-md-1" >
+                            <Row><label><div>score: <div className="col col-md-1" >
                             {
                              this.state.auth? 
                              <input
@@ -188,7 +210,7 @@ export default class Game extends React.Component{
                              onChange={this.handleInputChange} />: null
                             }
                             </div>
-                            {this.props.score[1]}</p></label>
+                            {this.props.score[1]}</div></label>
                         </Row>
                             </Col>
                         </Row>
@@ -243,7 +265,25 @@ export default class Game extends React.Component{
                              : 
                              null
                             }
-                        
+                         <ul style={this.ulStyle}>
+                            {/* {
+                            
+                                this.props.games.map((ele,index)=>
+                                
+                                <li key={index} style={this.l1Style}>
+                                <Card style={{ width: '18rem' }}>
+                                <Card.Img variant="top" src={ele[2]} />
+                                <Card.Title>{ele[0]}</Card.Title>
+                                <Card.Body>
+                                    <Card.Text>
+                                    <Button variant="success" onClick={()=>this.props.watch(ele[1])}>Watch</Button>
+                                    </Card.Text>
+                                </Card.Body>
+                                </Card>
+                                </li>
+                                ) */}
+                                
+                        </ul>
                          <ul style={this.ulStyle}>{
                             this.props.team.map((element, index)=>
                 
@@ -261,7 +301,7 @@ export default class Game extends React.Component{
                     <Modal.Footer>
                         <Button variant="dark" onClick={this.handleClose}>Close</Button>
                         {
-                             this.state.auth? <Button variant="dark" onClick={this.handleSave}>Save/Update changes</Button> : null
+                             this.state.auth? <Button variant="dark" onClick={this.handleSave}>Update changes</Button> : null
                         }
                     </Modal.Footer>
                 </Modal.Dialog>

@@ -29,6 +29,7 @@
     "build": "react-scripts build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
+    "awsdeploy": "aws s3 sync build/ s3://leaguemanagerwebapp",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
