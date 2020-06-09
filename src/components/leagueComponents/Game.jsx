@@ -288,10 +288,10 @@ export default class Game extends React.Component{
                             this.props.team.map((element, index)=>
                 
                             <li key={index} style={this.l1Style}>
-                            <Card style={{ width: '10rem' }}>
+                            {/* <Card style={{ width: '10rem' }}>
                             <Card.Img variant="top" src="https://i.ytimg.com/vi/qFwcahcDzP4/hqdefault.jpg" />
                             <Card.Title>Ishaan</Card.Title>
-                            </Card>
+                            </Card> */}
                             </li>
                             )
                             }

@@ -21,16 +21,6 @@ class LoginPage extends React.Component {
             <section className="bg-light page-section">
                 <div className="container">
                 <div>
-                <div className="alert alert-info">
-                    <strong>Please Use Simple Password, We do not have SSL/TLS certificate</strong><br/>
-                    <strong>We will secure our server/client transmission in near future</strong><br/>
-                    <strong>You can change your password in the future as well. However, we do salt and hash your password
-                        while storing it on our server-side database.
-                    </strong><br/>
-                    <strong>user: login
-                            pass: secret
-                    </strong>
-                </div>
                 <h2>Login</h2>
                 <Formik
                     initialValues={{
