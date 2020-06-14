@@ -23,8 +23,8 @@ export default class Game extends React.Component{
             },
             auth:false,
             groupId:this.props.groupId,
-            homePlayerScore:0,
-            awayPlayerScore:0,
+            homePlayerScore:this.props.score[0]?this.props.score[0]:0,
+            awayPlayerScore:this.props.score[1]?this.props.score[1]:0,
             videoLinks:[],
             videoLink:'',
             consumed:false
@@ -77,7 +77,13 @@ export default class Game extends React.Component{
         })
 
 
-        gameService._gameUpdate(formData);
+        gameService._gameUpdate(formData)
+        .then( res=> {
+            console.log(res);
+            this.setState({showModal:false});
+            window.location.reload(false);
+        })
+        .catch(err=>this.setState({showModal:false}));
         this.setState({showModal:false});
     }
 
@@ -190,11 +196,9 @@ export default class Game extends React.Component{
                              type="number"
                              value={this.state.homePlayerScore}
                              onChange={this.handleInputChange} />
-                             : null
+                             : this.props.score[0]
                             }
                         </div>
-                            {this.props.score[0]}
-                            
                             </p></label></Row>
                             </Col>
                             <Col xs={6} md={6}>
@@ -207,10 +211,10 @@ export default class Game extends React.Component{
                              name="awayPlayerScore"
                              type="number"
                              value={this.state.awayPlayerScore}
-                             onChange={this.handleInputChange} />: null
+                             onChange={this.handleInputChange} />: this.props.score[1]
                             }
                             </div>
-                            {this.props.score[1]}</div></label>
+                            </div></label>
                         </Row>
                             </Col>
                         </Row>

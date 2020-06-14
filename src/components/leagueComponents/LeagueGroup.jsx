@@ -19,6 +19,7 @@ export default class LeagueGroup extends React.Component{
       //Get group table
       groupService.fetchTable(this.props.leagueId, this.props.groupId)
       .then(res=>{
+        console.log(res);
           this.setState({table:[...res.data]})
       }).catch(err=> console.log(err.response));
     }
