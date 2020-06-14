@@ -1,29 +1,29 @@
 {
   "files": {
-    "main.css": "/leagueManager/static/css/main.b8418a8b.chunk.css",
-    "main.js": "/leagueManager/static/js/main.7c645e6c.chunk.js",
-    "main.js.map": "/leagueManager/static/js/main.7c645e6c.chunk.js.map",
-    "runtime-main.js": "/leagueManager/static/js/runtime-main.bdb0bc38.js",
-    "runtime-main.js.map": "/leagueManager/static/js/runtime-main.bdb0bc38.js.map",
+    "main.css": "/leagueManager/static/css/main.ca48924c.chunk.css",
+    "main.js": "/leagueManager/static/js/main.921db25a.chunk.js",
+    "main.js.map": "/leagueManager/static/js/main.921db25a.chunk.js.map",
+    "runtime-main.js": "/leagueManager/static/js/runtime-main.3e720247.js",
+    "runtime-main.js.map": "/leagueManager/static/js/runtime-main.3e720247.js.map",
     "static/css/2.9522b9fe.chunk.css": "/leagueManager/static/css/2.9522b9fe.chunk.css",
-    "static/js/2.a045c0de.chunk.js": "/leagueManager/static/js/2.a045c0de.chunk.js",
-    "static/js/2.a045c0de.chunk.js.map": "/leagueManager/static/js/2.a045c0de.chunk.js.map",
+    "static/js/2.217381b2.chunk.js": "/leagueManager/static/js/2.217381b2.chunk.js",
+    "static/js/2.217381b2.chunk.js.map": "/leagueManager/static/js/2.217381b2.chunk.js.map",
     "index.html": "/leagueManager/index.html",
-    "precache-manifest.8329c1e4906de795498ee01a8d4b7631.js": "/leagueManager/precache-manifest.8329c1e4906de795498ee01a8d4b7631.js",
+    "precache-manifest.d7908d40b3e2c416f6fbd4d3066832f5.js": "/leagueManager/precache-manifest.d7908d40b3e2c416f6fbd4d3066832f5.js",
     "service-worker.js": "/leagueManager/service-worker.js",
     "static/css/2.9522b9fe.chunk.css.map": "/leagueManager/static/css/2.9522b9fe.chunk.css.map",
-    "static/css/main.b8418a8b.chunk.css.map": "/leagueManager/static/css/main.b8418a8b.chunk.css.map",
-    "static/js/2.a045c0de.chunk.js.LICENSE.txt": "/leagueManager/static/js/2.a045c0de.chunk.js.LICENSE.txt",
+    "static/css/main.ca48924c.chunk.css.map": "/leagueManager/static/css/main.ca48924c.chunk.css.map",
+    "static/js/2.217381b2.chunk.js.LICENSE.txt": "/leagueManager/static/js/2.217381b2.chunk.js.LICENSE.txt",
     "static/media/adarsh.jpg": "/leagueManager/static/media/adarsh.f1113485.jpg",
     "static/media/amrit.jpg": "/leagueManager/static/media/amrit.66308110.jpg",
     "static/media/agency.min.css": "/leagueManager/static/media/map-image.f40ed5b1.png",
     "static/media/sunil.jpg": "/leagueManager/static/media/sunil.c22da35b.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.bdb0bc38.js",
+    "static/js/runtime-main.3e720247.js",
     "static/css/2.9522b9fe.chunk.css",
-    "static/js/2.a045c0de.chunk.js",
-    "static/css/main.b8418a8b.chunk.css",
-    "static/js/main.7c645e6c.chunk.js"
+    "static/js/2.217381b2.chunk.js",
+    "static/css/main.ca48924c.chunk.css",
+    "static/js/main.921db25a.chunk.js"
   ]
 }
