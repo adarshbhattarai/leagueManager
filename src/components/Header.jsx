@@ -44,16 +44,16 @@ export default () => {
       }
     return (
 <nav className={header} id="mainNav">
-    <div className="container">
+    <div className="container" ref={wrapperRef}>
       <a className="navbar-brand js-scroll-trigger" href={process.env.PUBLIC_URL+"/"}>Soccer League Manager</a>
-      <button className="navbar-toggler navbar-toggler-right" type="button"  ref={wrapperRef} onClick={toggleMenu} data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <button className="navbar-toggler navbar-toggler-right" type="button" onClick={toggleMenu} data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i className="fa fa-bars"></i>
       </button>
-      <div className={ (toggle?"collapse ":"")+"navbar-collapse"} id="navbarResponsive">
+      <div className={ (toggle?"collapse ":"")+"navbar-collapse"} id="navbarResponsive" >
       {
         currentUser?
-        <ul className="navbar-nav text-uppercase ml-auto">
+        <ul className="navbar-nav text-uppercase ml-auto" >
          <li className="nav-item">
             <a className="nav-link js-scroll-trigger" href={process.env.PUBLIC_URL+"/userprofile/"+currentUser.username}>{currentUser.username}</a>
           </li>
