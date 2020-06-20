@@ -16,9 +16,9 @@ function login(username, password) {
 
     return axios.post('/auth/login',{ username, password })
     .then(res=>{
-        localStorage.setItem('currentUser', JSON.stringify(res.data));
-        currentUserSubject.next(res.data);
-        return res;
+        localStorage.setItem('currentUser', JSON.stringify(res.data.data));
+        currentUserSubject.next(res.data.data);
+        return res.data;
     });
 
 }
@@ -26,7 +26,7 @@ function login(username, password) {
 function register(firstName, lastName, username,email, password, confirmPassword) {
     return axios.post('/auth/register',{ firstName, lastName,username,email,password })
     .then(res=>{
-        return res;
+        return res.data;
     });
 }
 
